@@ -75,20 +75,29 @@ public final class JsonTreeWriter extends JsonWriter {
 
   private void put(JsonElement value) {
     if (pendingName != null) {
-      if (!value.isJsonNull() || getSerializeNulls()) {
-        JsonObject object = (JsonObject) peek();
-        object.add(pendingName, value);
-      }
-      pendingName = null;
+
+      putObjectProperty(value);
     } else if (stack.isEmpty()) {
       product = value;
     } else {
-      JsonElement element = peek();
-      if (element instanceof JsonArray) {
-        ((JsonArray) element).add(value);
-      } else {
-        throw new IllegalStateException();
+      putArrayElement(value);
       }
+
+  }
+  private void putObjectProperty(JsonElement value) {
+    if (!value.isJsonNull() || getSerializeNulls()) {
+      JsonObject object = (JsonObject) peek();
+      object.add(pendingName, value);
+    }
+    pendingName = null;
+  }
+
+  private void putArrayElement(JsonElement value) {
+    JsonElement element = peek();
+    if (element instanceof JsonArray) {
+      ((JsonArray) element).add(value);
+    } else {
+      throw new IllegalStateException();
     }
   }
 
