@@ -644,42 +644,40 @@ public class JsonWriter implements Closeable, Flushable {
   }
 
   private void string(String value) throws IOException {
+    String[] replacements = htmlSafe ? HTML_SAFE_REPLACEMENT_CHARS : REPLACEMENT_CHARS;
     out.write('\"');
     int last = 0;
     int length = value.length();
     for (int i = 0; i < length; i++) {
       char c = value.charAt(i);
-      String replacement= getReplacementForChar(c);
+      String replacement = getReplacement(c, replacements);
       if (replacement != null) {
-        if (last < i) {
-          out.write(value, last, i - last);
-        }
+        writeSubString(value, last, i);
         out.write(replacement);
         last = i + 1;
       }
     }
-    if (last < length) {
-      out.write(value, last, length - last);
-    }
+    writeSubString(value, last, length);
     out.write('\"');
   }
 
-  private  String getReplacementForChar(char c){
-    if(c<128){
-      String[] replacements = htmlSafe ? HTML_SAFE_REPLACEMENT_CHARS : REPLACEMENT_CHARS;
+  private String getReplacement(char c, String[] replacements) {
+    if (c < 128) {
       return replacements[c];
-    }
-    else if (c == '\u2028') {
+    } else if (c == '\u2028') {
       return "\\u2028";
-    }
-    else if (c == '\u2029') {
+    } else if (c == '\u2029') {
       return "\\u2029";
-    }
-    else {
+    } else {
       return null;
     }
   }
 
+  private void writeSubString(String value, int startIndex, int endIndex) throws IOException {
+    if (endIndex > startIndex) {
+      out.write(value, startIndex, endIndex - startIndex);
+    }
+  }
 
   private void newline() throws IOException {
     if (formattingStyle == null) {
