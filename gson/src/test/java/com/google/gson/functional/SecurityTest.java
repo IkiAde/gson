@@ -74,7 +74,15 @@ public class SecurityTest {
     String json = JSON_NON_EXECUTABLE_PREFIX + "{stringValue:')]}\\u0027\\n'}";
     BagOfPrimitives target = gson.fromJson(json, BagOfPrimitives.class);
     assertThat(target.stringValue).isEqualTo(")]}'\n");
-  }  
+  }
+
+  @Test
+  public void testNullValueDeserialization(){
+    String json= "{\"stringValue\":null}";
+    Gson gson= gsonBuilder.create();
+    BagOfPrimitives target= gson.fromJson(json,BagOfPrimitives.class);
+    assertThat(target.stringValue).isNull();
+  }
   
   /**
    *  Gson should be able to deserialize a stream with non-exectuable token if it is created
