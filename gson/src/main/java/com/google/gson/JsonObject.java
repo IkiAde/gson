@@ -185,7 +185,7 @@ public final class JsonObject extends JsonElement {
     return members.get(memberName);
   }
 
- 
+
   /**
    * Convenience method to get the specified member as a {@link JsonArray}.
    *
