@@ -155,7 +155,7 @@ public final class ParseBenchmark {
   }
 
   public static void main(String[] args) throws Exception {
-    NonUploadingCaliperRunner.run(ParseBenchmark.class, args);
+    CaliperBenchmarkRunner.run(ParseBenchmark.class, args);
   }
 
   interface Parser {
