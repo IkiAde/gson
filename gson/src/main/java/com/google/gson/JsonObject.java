@@ -185,18 +185,7 @@ public final class JsonObject extends JsonElement {
     return members.get(memberName);
   }
 
-  /**
-   * Convenience method to get the specified member as a {@link JsonPrimitive}.
-   *
-   * @param memberName name of the member being requested.
-   * @return the {@code JsonPrimitive} corresponding to the specified member, or {@code null} if no
-   *   member with this name exists.
-   * @throws ClassCastException if the member is not of type {@code JsonPrimitive}.
-   */
-  public JsonPrimitive getAsJsonPrimitive(String memberName) {
-    return (JsonPrimitive) members.get(memberName);
-  }
-
+ 
   /**
    * Convenience method to get the specified member as a {@link JsonArray}.
    *
