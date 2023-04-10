@@ -329,7 +329,7 @@ public class MapTest {
               JsonSerializationContext context) {
             JsonArray array = new JsonArray();
             for (long value : src.values()) {
-              array.add(new JsonPrimitive(value));
+              array.addJsonElement(new JsonPrimitive(value));
             }
             return array;
           }

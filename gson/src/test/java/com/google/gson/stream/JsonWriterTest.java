@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import org.junit.Test;
+
 import junit.framework.TestCase;
 
 @SuppressWarnings("resource")
@@ -244,7 +244,7 @@ public class JsonWriterTest extends TestCase{
 
     JsonArray jsonArray = new JsonArray();
     for (String validNumber : validNumbers) {
-      jsonArray.add(new LazilyParsedNumber(validNumber));
+      jsonArray.addNumber(new LazilyParsedNumber(validNumber));
     }
 
     jsonWriter.jsonValue(jsonArray.toString());

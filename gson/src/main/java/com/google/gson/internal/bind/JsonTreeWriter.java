@@ -95,7 +95,7 @@ public final class JsonTreeWriter extends JsonWriter {
   private void putArrayElement(JsonElement value) {
     JsonElement element = peek();
     if (element instanceof JsonArray) {
-      ((JsonArray) element).add(value);
+      ((JsonArray) element).addJsonElement(value);
     } else {
       throw new IllegalStateException();
     }

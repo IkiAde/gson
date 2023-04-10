@@ -502,7 +502,7 @@ public class ParameterizedTypesTest {
       JsonObject jsonObject = new JsonObject();
       jsonObject.addProperty("q", 4);
       JsonArray jsonArray = new JsonArray();
-      jsonArray.add(jsonObject);
+      jsonArray.addJsonElement(jsonObject);
 
       assertCorrectlyDeserialized(gson.fromJson(jsonArray, typeToken));
       assertCorrectlyDeserialized(gson.fromJson(jsonArray, type));

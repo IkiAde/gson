@@ -230,7 +230,7 @@ public class ProtoTypeAdapter
           Collection<EnumValueDescriptor> enumDescs =
               (Collection<EnumValueDescriptor>) fieldPair.getValue();
           for (EnumValueDescriptor enumDesc : enumDescs) {
-            array.add(context.serialize(getEnumValue(enumDesc)));
+            array.addJsonElement(context.serialize(getEnumValue(enumDesc)));
             ret.add(name, array);
           }
         } else {

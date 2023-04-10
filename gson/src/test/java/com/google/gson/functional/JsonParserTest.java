@@ -75,7 +75,7 @@ public class JsonParserTest {
     obj.addProperty("stringValue", "foo");
     obj.addProperty("intValue", 11);
     JsonArray array = new JsonArray();
-    array.add(obj);
+    array.addJsonElement(obj);
     try {
       gson.fromJson(array, BagOfPrimitives.class);
       fail("BagOfPrimitives is not an array");
@@ -85,7 +85,7 @@ public class JsonParserTest {
   @Test
   public void testBadFieldTypeForCustomDeserializerCustomTree() {
     JsonArray array = new JsonArray();
-    array.add(new JsonPrimitive("blah"));
+    array.addJsonElement(new JsonPrimitive("blah"));
     JsonObject obj = new JsonObject();
     obj.addProperty("stringValue", "foo");
     obj.addProperty("intValue", 11);
@@ -100,7 +100,7 @@ public class JsonParserTest {
   @Test
   public void testBadFieldTypeForDeserializingCustomTree() {
     JsonArray array = new JsonArray();
-    array.add(new JsonPrimitive("blah"));
+    array.addJsonElement(new JsonPrimitive("blah"));
     JsonObject primitive1 = new JsonObject();
     primitive1.addProperty("string", "foo");
     primitive1.addProperty("intValue", 11);
